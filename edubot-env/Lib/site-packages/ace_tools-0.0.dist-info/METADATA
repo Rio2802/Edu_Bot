@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: ace_tools
+Version: 0.0
+Summary: A placeholder empty package
+Home-page: 
+Author: Paul McMillan
+Author-email: paul@mcmillan.ws
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+

@@ -40,7 +40,7 @@ def load_parameters():
         print(f"An error occurred while loading settings: {e}")
 
 class RAPTOR:
-    def __init__(self, files, collection_name="edubot_raptor", force_rebuild=False):
+    def __init__(self, files, collection_name="EdBot_raptor", force_rebuild=False):
         load_parameters()
         self.files = files
         self.collection_name = collection_name
@@ -123,5 +123,5 @@ class RAPTOR:
             raise
 
 def get_raptor(files, force_rebuild=False):
-    velociraptor = RAPTOR(files=files, collection_name="edubot_raptor", force_rebuild=force_rebuild)
+    velociraptor = RAPTOR(files=files, collection_name="EdBot_raptor", force_rebuild=force_rebuild)
     return velociraptor

@@ -1,7 +1,6 @@
 streamlit==1.35.0
 asyncio==3.4.3
 llama-index==0.10.42
-#conda install google-auth google-auth-oauthlib
 charset-normalizer==3.3.2
 google-api-core==2.19.0
 google-api-python-client==2.131.0

@@ -4,93 +4,83 @@ from deepeval.metrics import AnswerRelevancyMetric, FaithfulnessMetric
 from deepeval.test_case import LLMTestCase
 
 CONTEXT = """
-IZVEDBENI PLAN NASTAVE KOLEGIJA Kod i naziv kolegija 87243, INF007 Programsko inženjerstvo Nastavnik/nastavnica  Suradnik/suradnica doc. dr. sc. Nikola Tanković (nositelj) Studijski program Sveučilišni preddiplomski studij Informatika Vrsta kolegija Obvezan  Razina kolegija Preddiplomski Semestar Zimski  Godina studija III. Mjesto izvođenja Dvorana 402, nova zgrada FET-a „Dr. Mijo Mirković“ Jezik izvođenja Hrvatski Broj ECTS bodova 6,0 Broj sati u semestru 30P – 30V – 0S    Preduvjeti za upis i za svladavanje Odslušani kolegiji Programiranje, Baze podataka I, Napredne tehnike programiranja Korelativnost Programiranje, Baze podataka I, Baze podataka II, Strukture podataka i algoritmi, Napredne tehnike programiranja, Web aplikacije Cilj kolegija  Upoznati studente sa suvremenim tehnikama razvoja programskih aplikacija i sustava.   Savladati primjenjive paradigme, programske jezike, knjižnice i radne okvire za razvoj programskih rješenja.  Ishodi učenja 1. Prikupiti i analizirati korisničke zahtjeve 2. Primijeniti jezik UML pri oblikovanju sustava 3. Objasniti i primijeniti različite arhitekturne stilove 4. Primijeniti barem dva programska jezika i jedan okvir za razvoj aplikacija 5. Primijeniti agilnu metodu u razvoju programske podrške 6. Primijeniti metode za testiranje programske podrške i oblikovati sustav kontinuiranog testiranja 7. Timskim radom razviti kompletno programsko rješenje i pripadnu dokumentaciju koje udovoljava funkcionalnim i nefunkcionalnim zahtjevima Sadržaj kolegija 1. Uvod u programsko inženjerstvo. Metode razvoja programskih proizvoda s naglaskom na agilne metode. 2. Prikupljanje zahtjeva i prototipiranje sustava. 3. Modeliranje sustava u pomoću jezika UML. Modeli UML-a. 4. Programski jezik Javascript. Programski okvir Vue. 5. Implementacija aplikacije u oblaku pomoću okvira Vue/Javascript i usluge Firebase.
-Struktura studija "Upravljanje poslovnim procesima" na prijediplomskom studiju Informatike uključuje kolegij pod nazivom "Upravljanje poslovnim procesima" (UPPFIPU) koji se izvodi u zimskom semestru treće godine studija u Puli. Kolegij nosi 6 ECTS bodova i sastoji se od 30 sati predavanja i 30 sati vježbi. Nema preduvjeta za upis kolegija, ali je potrebno položiti kolegij "Osnove IKT" za pristup testu ili ispitu.
+EXECUTIVE PLAN OF COURSE TEACHING Course code and name 87243, INF007 Software engineering Teacher Associate assistant. Ph.D. Nikola Tanković (instructor) Study program University undergraduate study Informatics Type of course Compulsory Course level Undergraduate Semester Winter Year of study III. Place of performance Hall 402, new building of FET "Dr. Mijo Mirković" Language of instruction Croatian Number of ECTS credits 6.0 Number of hours per semester 30P - 30V - 0S Prerequisites for enrollment and mastering Courses taken Programming, Databases I, Advanced programming techniques Correlativity Programming, Databases I, Databases II, Structures data and algorithms, Advanced programming techniques, Web applications. The aim of the course is to acquaint students with modern techniques for developing software applications and systems.   Master applicable paradigms, programming languages, libraries and frameworks for developing software solutions.  Learning outcomes 1. Collect and analyze user requirements 2. Apply the UML language in system design 3. Explain and apply different architectural styles 4. Apply at least two programming languages ​​and one application development framework 5. Apply the agile method in software development 6. Apply methods for testing software support and form a system of continuous testing 7. Teamwork to develop a complete software solution and related documentation that meets functional and non-functional requirements Course content 1. Introduction to software engineering. Software product development methods with an emphasis on agile methods. 2. Gathering requirements and system prototyping. 3. System modeling using the UML language. UML models. 4. Javascript programming language. The Vue framework. 5. Cloud application implementation using Vue/Javascript framework and Firebase service.
+The structure of the study "Management of Business Processes" at the undergraduate study of Informatics includes a course called "Management of Business Processes" (UPPFIPU) which is conducted in the winter semester of the third year of study in Pula. The course carries 6 ECTS points and consists of 30 hours of lectures and 30 hours of exercises. There are no prerequisites for enrolling in the course, but it is necessary to pass the "Fundamentals of ICT" course to access the test or exam.
+The aim of the course is to acquire competencies for business process management, business process model design and application of business process analysis methods using modern programming tools and frameworks. Learning outcomes include describing the issues of business process management, explaining the role of information systems, applying optimal ways of managing business processes, comparing reference models and methodological frameworks, and using BPMN, UML and Petri Nets methods for modeling business processes.
 
-Cilj kolegija je usvajanje kompetencija za upravljanje poslovnim procesima, dizajn modela poslovnih procesa te primjena metoda za analizu poslovnih procesa koristeći suvremene programske alate i okvire. Ishodi učenja uključuju opisivanje problematike upravljanja poslovnim procesima, objašnjavanje uloge informacijskih sustava, primjenu optimalnih načina upravljanja poslovnim procesima, usporedbu referentnih modela i metodoloških okvira te korištenje BPMN, UML i Petri Nets metoda za modeliranje poslovnih procesa.
+Required reading for the course includes the works "Business Process Modeling" by Brumec, J. and Brumec, S. (2018) and "Fundamentals of Business Process Management" by Dumas, M. et al. (2013). Optional literature includes the works "Business Process Management: Concepts, Languages, Architectures" by Weska, M. (2012) and "Management of business processes – organizational and informational approach" by Bosilj-Vukšić, V., Hernaus, T., Kovačić, A (2008).
 
-Obvezna literatura za kolegij uključuje djela "Modeliranje poslovnih procesa" autora Brumec, J. i Brumec, S. (2018) te "Fundamentals of Business Process Management" autora Dumas, M. et al. (2013). Izborna literatura uključuje djela "Business Process Management: Concepts, Languages, Architectures" autora Weske, M. (2012) i "Upravljanje poslovnim procesima – organizacijski i informacijski pristup" autora Bosilj-Vukšić, V., Hernaus, T., Kovačić, A. (2008).
-
-Dodatno, za kolegij "Programsko inženjerstvo" preporučena literatura uključuje knjige "Professional Software Development" autora Mike G. Miller (2020), "Software Engineering Body of Knowledge (SWEBOK)" od IEEE (2014), "Clean Architecture: A Craftsman's Guide to Software Structure and Design" autora Robert C. Martin (2017) i "Beginning Software Engineering" autora Rod Stephens (2015). Izborna literatura uključuje "Software Engineering at Google: Lessons Learned from Programming Over Time" autora Titues Winters, Tom Manshreck, Hyrum Wright (2020), dok priručna literatura uključuje "Eloquent JavaScript" autora Marijn Haverbeke (2019), "Learning Vue.js 2" autora Olga Filipova (2016) i "Version Control with Git" autora Jon Loeliger (2012).
-Struktura studija UPRAVLJANJE POSLOVNIM PROCESIMA
-Upravljanje poslovnim procesima
-Kod i naziv kolegija: 199739, Upravljanje poslovnim procesima (UPPFIPU)
-Nastavnici
-izv. prof. dr. sc. Darko Etinger (nositelj)
+Additionally, for the "Software Engineering" course, recommended reading includes "Professional Software Development" by Mike G. Miller (2020), "Software Engineering Body of Knowledge (SWEBOK)" by IEEE (2014), "Clean Architecture: A Craftsman's Guide to Software Structure and Design" by Robert C. Martin (2017) and "Beginning Software Engineering" by Rod Stephens (2015). Optional reading includes "Software Engineering at Google: Lessons Learned from Programming Over Time" by Titues Winters, Tom Manshreck, Hyrum Wright (2020), while reference reading includes "Eloquent JavaScript" by Marijn Haverbeke (2019), "Learning Vue.js 2 " by Olga Filipova (2016) and "Version Control with Git" by Jon Loeliger (2012).
+Study structure BUSINESS PROCESS MANAGEMENT
+Management of business processes
+Course code and name: 199739, Business Process Management (UPPFIPU)
+Teachers
+associate professor Ph.D. Darko Etinger (holder)
 Dario Kukuljan, mag. paed. et educ. inf.
-Informacije o kolegiju
-Studijski program: Informatika (prijediplomski)
-Vrsta kolegija: obvezni
-Razina kolegija: prijediplomski
-Semestar: zimski
-Godina studija: III.
-Mjesto izvođenja: Pula
-Jezik izvođenja: hrvatski, engleski
-Broj ECTS bodova: 6
-Broj sati u semestru: 30P - 30V - 0S
-Korelativnost:
-Fakultet organizacije i informatike Varaždin: Modeliranje poslovnih procesa
-Ekonomski fakultet Zagreb: Upravljanje poslovnim procesima
-Preduvjeti:
-Nema preduvjeta za upis kolegija.
-Preduvjet za pristup testu ili prijavu ispita je prethodno položen kolegij Osnove IKT.
-Cilj kolegija
-Usvojiti kompetencije za upravljanje poslovnim procesima, dizajn modela poslovnih procesa i primjena metoda
-za analizu poslovnih procesa koristeći suvremene programske alate i okvire.
-Ishodi učenja
-1.Opisati problematiku upravljanja poslovnim procesima, interpretirati osnovna obilježja, prednosti i ne-
-dostatke procesnog pristupa.
-2.Objasniti ulogu integralnoga informacijskog sustava i sustava za upravljanje poslovnim procesima, u
-postizanju više razine procesne zrelosti.
-3.Primijeniti optimalni način upravljanja poslovnim procesima na temelju analize i prikazivanja, unaprjeđi-
-vanja i mjerenja te primjene koncepta procesne zrelosti.
-4.Usporediti referentne modele i metodološke okvire koji olakšavaju provedbu projekata promjene poslovnih
-procesa.
-5. Koristiti BPMN, UML i Petri Nets metode za modeliranje poslovnih procesa.
-6. Primijeniti programske alate za oblikovanje i analizu poslovnih procesa.
-Sadržaj kolegija
-1. Procesni pristup - orijentacija na poslovne procese.
-2. Procesno orijentirana organizacija.
-3. Analiza poslovnih procesa, upravljanje poslovnim procesima.
-4. Znanje u poslovnim procesima i informacijskom sustavu.
-5. Organizacijski i informacijski pristup razvoju sustava za upravljanje poslovnim procesima.
-6. Metode modeliranja poslovnih procesa i razvoja modela poduzeća.
+Information about the course
+Study program: Informatics (undergraduate)
+Course type: compulsory
+Course level: undergraduate
+Semester: winter
+Year of study: III.
+Place of performance: Pula
+Language of performance: Croatian, English
+Number of ECTS credits: 6
+Number of hours per semester: 30P - 30V - 0S
+Correlativity:
+Faculty of Organization and Informatics Varaždin: Modeling business processes
+Zagreb Faculty of Economics: Business Process Management
+Prerequisites:
+There are no prerequisites for enrolling in the course.
+The prerequisite for taking the test or applying for the exam is to have previously completed the ICT Basics course.
+Objective of the course
+Acquire competencies for business process management, design of business process models and application of methods
+for analyzing business processes using modern programming tools and frameworks.
+Learning outcomes
+1. Describe the issue of business process management, interpret the basic features, advantages and disadvantages
+sufficient process approach.
+2. Explain the role of an integral information system and a system for managing business processes, u
+achieving a higher level of process maturity.
+3. Apply the optimal way of managing business processes based on analysis and presentation, improve
+measurement and application of the concept of process maturity.
+4. To compare reference models and methodological frameworks that facilitate the implementation of business change projects
+process.
+5. Use BPMN, UML and Petri Nets methods for modeling business processes.
+6. Apply software tools for design and analysis of business processes.
+Course content
+1. Process approach - orientation to business processes.
+2. Process-oriented organization.
+3. Business process analysis, business process management.
+4. Knowledge in business processes and information systems.
+5. Organizational and informational approach to the development of business process management systems.
+6. Methods of business process modeling and company model development.
 7. BPMN - Business process model and notation
-Stranica 214
-Kolegij "Programsko inženjerstvo" na Sveučilišnom preddiplomskom studiju Informatika, kojeg vodi doc. dr. sc. Nikola Tanković, obvezan je za treću godinu studija u zimskom semestru. Kolegij se održava u dvorani 402 nove zgrade FET-a „Dr. Mijo Mirković“ na hrvatskom jeziku i nosi 6 ECTS bodova. Preduvjeti za upis uključuju odslušane kolegije Programiranje, Baze podataka I i Napredne tehnike programiranja. Cilj kolegija je upoznati studente sa suvremenim tehnikama razvoja programskih aplikacija i sustava, te savladati primjenjive paradigme, programske jezike, knjižnice i radne okvire.
-
-Ishodi učenja uključuju prikupljanje i analizu korisničkih zahtjeva, primjenu UML jezika, objašnjavanje i primjenu različitih arhitekturnih stilova, korištenje barem dva programska jezika i jednog okvira za razvoj aplikacija, primjenu agilne metode, metode za testiranje programske podrške i oblikovanje sustava kontinuiranog testiranja, te timski rad na razvoju kompletnog programskog rješenja.
-
-Sadržaj kolegija obuhvaća uvod u programsko inženjerstvo, prikupljanje zahtjeva i prototipiranje sustava, modeliranje sustava pomoću UML-a, programski jezik Javascript i okvir Vue, implementaciju aplikacije u oblaku pomoću Vue/Javascript i Firebase, alate za upravljanje inačicama koda (Git, GitHub), sustave za pohranu podataka u oblaku (Firebase Firestore i Storage), te verifikaciju programske podrške (unit testovi, end-to-end testovi, sustav za kontinuiranu integraciju).
+Page 214
+Course "Program Engineering" at the University Undergraduate Study of Informatics, led by Assoc. Ph.D. Nikola Tanković, is required for the third year of study in the winter semester. The course is held in hall 402 of the new FET building "Dr. Mijo Mirković" in the Croatian language and has 6 ECTS credits. Prerequisites for admission include completed courses Programming, Databases I and Advanced Programming Techniques. The aim of the course is to acquaint students with modern techniques for developing software applications and systems, and to master applicable paradigms, programming languages, libraries and frameworks.
 
 Studenti su obvezni pohađati nastavu, izraditi projektni zadatak, pristupiti kontrolnim zadaćama i usmenom ispitu. Projektni zadatak nosi 50% ocjene, kontrolne zadaće 10%, a usmeni ispit 40%. Da bi položili kolegij, studenti moraju ostvariti najmanje 50% bodova putem aktivnosti kontinuiranog praćenja ili pristupiti završnom ispitu.
-6. Alati za upravljanjem inačicama programskog koda. Alat Git, usluga GitHub i proces kolaborativnog razvoja. 7. Sustavi za pohranu podataka u oblaku Firebase Firestore i Storage. 8. Verifikacija programske podrške. Unit testovi i testovi end-to-end tipa. Sustav za kontinuiranu integraciju softvera.
-Planirane aktivnosti, metode učenja i poučavanja i načini vrednovanja Obveze Ishodi Sati ECTS Maksimalni udio u ocjeni (%) Pohađanje nastave  1-6 28 1,0 0%  Projekt  1-7 98 3,5 50%  Kontrolne zadaće  1-6 14 0,5 10%  Usmeni ispit  1-6  28 1,0 40%  Ukupno 168 6,0 100%  Dodatna pojašnjenja (kriteriji ocjenjivanja):  Pohađanje nastave: Tijekom predavanja se studentima prezentiraju koncepti vezani uz razvoj raspodijeljenih višeslojnih aplikacija te se isti ilustriraju praktičnim primjerima kroz vježbe u računalnom laboratoriju.   Projektni zadatak: Studenti su dužni samostalno odabrati temu projektnoga zadataka koju im odobrava nastavnik. Unaprijed će se definirati tematski okvir i potrebna količina funkcionalnosti. Pri izradi projektnog zadatka moguće je samostalno odabrati korištene programske jezike i okvire. Projektni zadatak potrebno je realizirati kroz dvije komponente: prototip aplikacije i sama aplikacija. Studenti su dužni izrađen projekt postaviti na jedan od sustava za upravljanje inačicama izvorišnog koda pomoću kojega će se pratiti napredak u izgradnji projekta te dodatno postaviti poveznicu na izvorišni kod na za to predviđeno mjesto na e-učenju. Uspješno obranjen projekt nosi najviše 50 bodova, od čega se 5 bodova odnosi na prototip, 20 bodova na komponente klijenta, 20 bodova na komponente poslužitelja i 5 bodova na izlaganje projekta. Korištenje tuđeg rješenja (plagijat) je zabranjeno te povlači disciplinsku odgovornost.  Kontrolne zadaće: Tijekom izvođenja nastave provest će se provjere znanja koje će razmjerno pridonijeti konačnim bodovima u maksimalnom iznosu od 10%. Svaka provjera sastoji se u ostvarivanju tražene funkcionalnosti pomoću skriptnih jezika i biblioteka obrađenih kroz prethodna predavanja.  Usmeni ispit: Na usmenom ispitu u zadnjem tjednu nastave utvrđuje se poznavanje iznesene građe kolegija sukladno ishodima učenja. Moguće je ostvariti do 40% bodova.  Ispit je položen ukoliko je student putem aktivnosti kontinuiranog praćenja tijekom semestra ostvari najmanje 50% bodova. Ocjena kontinuiranog praćenja se temeljem ostvarenih bodova oblikuje prema sljedećoj skali:
-Tekst pruža osnovne informacije o varijablama i operatorima u JavaScriptu, uključujući pravila za deklaraciju varijabli s `const`, različite tipove podataka, te korištenje stringova i eksponencijalne notacije. Objašnjava osnovne operatore kao što su aritmetički, pridruživanja, usporedni, logički i tipa operatori, te njihovu upotrebu. JavaScript se koristi za izradu interaktivnih web stranica, kao i za server-side, desktop i mobilne aplikacije. Postoje tri načina pisanja JavaScript koda u web pregledniku: inline, internal i external JavaScript.
+6. Tools for managing versions of program code. The Git tool, the GitHub service, and the collaborative development process. 7. Data storage systems in the cloud Firebase Firestore and Storage. 8. Verification of program support. Unit tests and end-to-end type tests. A system for continuous software integration.
+Planned activities, learning and teaching methods and assessment methods Obligations Outcomes Hours ECTS Maximum share in the grade (%) Attendance at classes 1-6 28 1.0 0% Project 1-7 98 3.5 50% Control tasks 1-6 14 0, 5 10% Oral exam 1-6 28 1.0 40% Total 168 6.0 100% Additional clarifications (evaluation criteria): Class attendance: During lectures, students are presented with concepts related to the development of distributed multi-layer applications and are illustrated with practical examples through exercises in the computer laboratory.   Project assignment: Students are required to independently choose the topic of project assignments approved by the teacher. The thematic framework and the required amount of functionality will be defined in advance. When creating a project assignment, it is possible to independently choose the used programming languages ​​and frameworks. The project task needs to be realized through two components: the application prototype and the application itself. Students are required to place the created project on one of the source code version management systems, which will be used to monitor the progress in building the project, and additionally place a link to the source code in the designated place on e-learning. A successfully defended project carries a maximum of 50 points, of which 5 points refer to the prototype, 20 points to the client components, 20 points to the server components and 5 points to the presentation of the project. Using someone else's solution (plagiarism) is prohibited and entails disciplinary liability.  Control tasks: During the course, knowledge tests will be conducted, which will proportionally contribute to the final points in the maximum amount of 10%. Each check consists in realizing the required functionality using script languages ​​and libraries covered in previous lectures.  Oral exam: At the oral exam in the last week of classes, knowledge of the presented course material is determined in accordance with the learning outcomes. It is possible to earn up to 40% points.  The exam is passed if the student achieves at least 50% points through continuous monitoring activities during the semester. The assessment of continuous monitoring is based on the achieved points according to the following scale:
+The text provides basic information about variables and operators in JavaScript, including the rules for declaring variables with `const', different data types, and the use of strings and exponential notation. Explains basic operators such as arithmetic, association, comparison, logical, and type operators, and their uses. JavaScript is used to create interactive web pages, as well as server-side, desktop and mobile applications. There are three ways to write JavaScript code in a web browser: inline, internal, and external JavaScript.
 
-Tekst također pokriva kontrolne strukture poput if-else, logičke operatore, uvjete za dobivanje zajma, iteracije i petlje, te korištenje break i continue naredbi. Detaljno se razrađuju funkcije, njihova deklaracija, pozivanje i različiti načini korištenja, uključujući funkcije višeg reda i rekurziju. Objašnjava se validacija forme i daje primjere funkcija za različite zadatke.
+The structure of the study "Management of Business Processes" at the undergraduate study of Informatics includes the course "Management of Business Processes" which is conducted in the winter semester of the third year in Pula. The course carries 6 ECTS credits, consists of 30 hours of lectures and 30 hours of exercises, and there are no prerequisites for enrollment, but it is necessary to pass the "Fundamentals of ICT" course. The goal of the course is the acquisition of competencies for business process management, the design of business process models, and the application of business process analysis methods using modern tools and frameworks.
 
-Struktura studija "Upravljanje poslovnim procesima" na prijediplomskom studiju Informatike uključuje kolegij "Upravljanje poslovnim procesima" koji se izvodi u zimskom semestru treće godine u Puli. Kolegij nosi 6 ECTS bodova, sastoji se od 30 sati predavanja i 30 sati vježbi, te nema preduvjeta za upis, ali je potrebno položiti kolegij "Osnove IKT". Cilj kolegija je usvajanje kompetencija za upravljanje poslovnim procesima, dizajn modela poslovnih procesa te primjena metoda za analizu poslovnih procesa koristeći suvremene alate i okvire.
-
-Kolegij "Programsko inženjerstvo" na Sveučilišnom preddiplomskom studiju Informatika, kojeg vodi doc. dr. sc. Nikola Tanković, obvezan je za treću godinu studija u zimskom semestru. Kolegij se održava u dvorani 402 nove zgrade FET-a „Dr. Mijo Mirković“ na hrvatskom jeziku i nosi 6 ECTS bodova. Preduvjeti za upis uključuju odslušane kolegije Programiranje, Baze podataka I i Napredne tehnike programiranja. Cilj kolegija je upoznati studente sa suvremenim tehnikama razvoja programskih aplikacija i sustava, te savladati primjenjive paradigme, programske jezike, knjižnice i radne okvire.
-
-Pravilnik o studiranju na daljinu na Sveučilištu Jurja Dobrile u Puli uređuje pravila online studiranja, organizaciju nastave, sustav praćenja i vrednovanja studenata, te prava i obveze studenata. Online nastava se izvodi na hrvatskom i engleskom jeziku, a Sveučilište osigurava potrebnu računalnu podršku i kontinuirano usavršavanje nastavnog osoblja. Studenti imaju pristup online mentorima, administrativnoj i tehničkoj podršci, te materijalima za nastavu u digitalnom obliku. Studenti su dužni ispuniti minimalne tehničke uvjete za praćenje nastave, a ispiti se provode online ili u kontroliranim uvjetima. Sveučilište također ima sustav osiguravanja kvalitete koji uključuje različite postupke praćenja i unapređivanja kvalitete studijskih programa.
 """
 
 ACTUAL_OUTPUT = """
-Dragi student, šifre kolegija "Upravljanje poslovnim procesima" i "Programsko inženjerstvo" su odgovarajuće 6 ECTS bodova.
+Dear student, the course codes "Business Process Management" and "Software Engineering" are equivalent to 6 ECTS credits.
 """
 
 
 EXPECTED_OUTPUT= """
-Šifra kolegija "Upravljanje poslovnim procesima" je 199739, a šifra kolegija "Programsko inženjerstvo" je 87243.
+The course code "Business Process Management" is 199739, and the course code "Software Engineering" is 87243.
 """
 
 def test_case():
     answer_relevancy_metric = AnswerRelevancyMetric(threshold=0.5)
     faithfulness_metric = FaithfulnessMetric(threshold=0.5)
     test_case = LLMTestCase(
-        input="Koje su šifre kolegija Upravljanje poslovnim procesima i Programsko inženjerstvo?",
+        input="What are the course codes for Business Process Management and Software Engineering?",
         actual_output=ACTUAL_OUTPUT,
         expected_output=EXPECTED_OUTPUT,
         retrieval_context=[CONTEXT]

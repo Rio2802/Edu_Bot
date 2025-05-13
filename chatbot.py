@@ -20,7 +20,7 @@ load_dotenv()
 def render_chatbot():
     llm_settings = get_llm()
     if "messages" not in st.session_state:
-        st.session_state["messages"] = [{"role": "assistant", "content": "Tu sam! Kako ti mogu pomoći?🤖"}]
+        st.session_state["messages"] = [{"role": "assistant", "content": "I'm here! How can I help you?🤖"}]
 
     for msg in st.session_state.messages:
         st.chat_message(msg["role"]).write(msg["content"])
@@ -86,11 +86,11 @@ def render_chatbot():
 
             if st.session_state["user_context_included"]:
                 if st.session_state.debug_mode:
-                    st.info(f"Uključujem podatke o studentu kao kontekst: Godina studija: {st.session_state['user_info']['study_year']}, Poznavanje programiranja: {st.session_state['user_info']['programming_knowledge']}/10")
+                    st.info(f"I am including student information as context: Year of study: {st.session_state['user_info']['study_year']}, Knowledge of programming: {st.session_state['user_info']['programming_knowledge']}/10")
       
             if st.session_state["use_full_conversation"]:
                 if st.session_state.debug_mode:
-                    st.info("Koristim cijeli razgovor kao kontekst")
+                    st.info("I'm using the whole conversation as context")
                 conversation = ""
                 for msg in st.session_state.messages:
                     conversation += f"{msg['role'].upper()}: {msg['content']}\n"
@@ -99,7 +99,7 @@ def render_chatbot():
                 response, intent = intent_recognition(conversation, velociraptor, sql_query_engine, web_scraper_engine)
             else:
                 if st.session_state.debug_mode:
-                    st.info("Koristim samo zadnji upit")
+                    st.info("I only use the last query")
 
                 response, intent = intent_recognition(prompt, velociraptor, sql_query_engine, web_scraper_engine)
 
